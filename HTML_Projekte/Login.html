@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="de">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Anmelden</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--ink: #172126;
+			--muted: #667276;
+			--paper: #f7f5ef;
+			--panel: #fffdf8;
+			--line: #d9ded9;
+			--accent: #d8613c;
+			--accent-dark: #a53e28;
+			--shadow: 0 24px 70px rgba(43, 52, 44, .15);
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			min-height: 100vh;
+			margin: 0;
+			display: grid;
+			place-items: center;
+			padding: 24px;
+			color: var(--ink);
+			background:
+				radial-gradient(circle at 12% 18%, rgba(216, 97, 60, .16), transparent 30%),
+				radial-gradient(circle at 92% 84%, rgba(77, 125, 101, .18), transparent 32%),
+				var(--paper);
+			font-family: Georgia, "Times New Roman", serif;
+		}
+
+		.login-window {
+			width: min(100%, 960px);
+			min-height: 590px;
+			display: grid;
+			grid-template-columns: .9fr 1.1fr;
+			overflow: hidden;
+			border: 1px solid rgba(23, 33, 38, .08);
+			border-radius: 18px;
+			background: var(--panel);
+			box-shadow: var(--shadow);
+		}
+
+		.welcome {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			padding: clamp(30px, 5vw, 64px);
+			color: #fffaf4;
+			background: #284940;
+		}
+
+		.mark {
+			width: 42px;
+			height: 42px;
+			display: grid;
+			place-items: center;
+			border: 1px solid rgba(255, 250, 244, .45);
+			border-radius: 50%;
+			font-size: 20px;
+		}
+
+		.welcome h1 {
+			max-width: 320px;
+			margin: 0 0 18px;
+			font-size: clamp(2.5rem, 5vw, 4.8rem);
+			font-weight: 400;
+			line-height: .96;
+			letter-spacing: 0;
+		}
+
+		.welcome p {
+			max-width: 290px;
+			margin: 0;
+			color: rgba(255, 250, 244, .76);
+			font-family: Arial, sans-serif;
+			font-size: .92rem;
+			line-height: 1.6;
+		}
+
+		.welcome small {
+			color: rgba(255, 250, 244, .55);
+			font-family: Arial, sans-serif;
+			font-size: .75rem;
+		}
+
+		.form-panel {
+			display: flex;
+			align-items: center;
+			padding: clamp(30px, 6vw, 80px);
+		}
+
+		form { width: 100%; max-width: 360px; margin: auto; }
+
+		.eyebrow {
+			margin: 0 0 12px;
+			color: var(--accent-dark);
+			font-family: Arial, sans-serif;
+			font-size: .7rem;
+			font-weight: 700;
+			letter-spacing: .16em;
+			text-transform: uppercase;
+		}
+
+		.form-panel h2 {
+			margin: 0 0 10px;
+			font-size: clamp(2rem, 4vw, 3rem);
+			font-weight: 400;
+			line-height: 1;
+		}
+
+		.intro {
+			margin: 0 0 32px;
+			color: var(--muted);
+			font-family: Arial, sans-serif;
+			font-size: .9rem;
+			line-height: 1.5;
+		}
+
+		.field { margin-bottom: 18px; }
+
+		label {
+			display: block;
+			margin-bottom: 8px;
+			font-family: Arial, sans-serif;
+			font-size: .78rem;
+			font-weight: 700;
+		}
+
+		input {
+			width: 100%;
+			min-height: 48px;
+			padding: 0 14px;
+			border: 1px solid var(--line);
+			border-radius: 7px;
+			color: var(--ink);
+			background: #fff;
+			font: 1rem Arial, sans-serif;
+			outline: none;
+			transition: border-color .2s, box-shadow .2s;
+		}
+
+		input:focus {
+			border-color: var(--accent);
+			box-shadow: 0 0 0 3px rgba(216, 97, 60, .14);
+		}
+
+		.password-row { position: relative; }
+		.password-row input { padding-right: 74px; }
+
+		.toggle-password {
+			position: absolute;
+			top: 50%;
+			right: 10px;
+			padding: 5px;
+			border: 0;
+			color: var(--accent-dark);
+			background: transparent;
+			cursor: pointer;
+			font: 700 .72rem Arial, sans-serif;
+		}
+
+		.options {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 12px;
+			margin: 4px 0 26px;
+			font: .78rem Arial, sans-serif;
+		}
+
+		.remember { display: flex; align-items: center; gap: 8px; color: var(--muted); }
+		.remember input { width: 15px; min-height: 15px; accent-color: var(--accent); }
+		a { color: var(--accent-dark); text-decoration: none; }
+		a:hover { text-decoration: underline; }
+
+		.submit {
+			width: 100%;
+			min-height: 50px;
+			border: 0;
+			border-radius: 7px;
+			color: #fff;
+			background: var(--accent);
+			cursor: pointer;
+			font: 700 .82rem Arial, sans-serif;
+			letter-spacing: .04em;
+			transition: background .2s, transform .2s;
+		}
+
+		.submit:hover { background: var(--accent-dark); transform: translateY(-1px); }
+		.status { min-height: 20px; margin: 14px 0 0; color: var(--accent-dark); font: .78rem Arial, sans-serif; }
+
+		@media (max-width: 680px) {
+			body { padding: 12px; }
+			.login-window { grid-template-columns: 1fr; min-height: auto; }
+			.welcome { min-height: 260px; }
+			.welcome small { margin-top: 35px; }
+			.form-panel { padding: 40px 28px 46px; }
+		}
+	</style>
+</head>
+<body>
+	<main class="login-window" aria-label="Login-Fenster">
+		<section class="welcome" aria-label="Willkommen">
+			<div class="mark" aria-hidden="true">+</div>
+			<div>
+				<h1>Schön, dass du da bist.</h1>
+				<p>Dein persönlicher Arbeitsbereich ist nur einen Schritt entfernt.</p>
+			</div>
+			<small>Dein Konto. Dein Raum. Dein Rhythmus.</small>
+		</section>
+
+		<section class="form-panel">
+			<form id="login-form">
+				<p class="eyebrow">Willkommen zurück</p>
+				<h2>Anmelden</h2>
+				<p class="intro">Melde dich an, um fortzufahren.</p>
+
+				<div class="field">
+					<label for="email">E-Mail-Adresse</label>
+					<input id="email" name="email" type="email" autocomplete="email" placeholder="name@beispiel.de" required>
+				</div>
+
+				<div class="field">
+					<label for="password">Passwort</label>
+					<div class="password-row">
+						<input id="password" name="password" type="password" autocomplete="current-password" placeholder="Dein Passwort" required minlength="6">
+						<button class="toggle-password" type="button" aria-controls="password" aria-label="Passwort anzeigen">Anzeigen</button>
+					</div>
+				</div>
+
+				<div class="options">
+					<label class="remember"><input type="checkbox" name="remember"> Angemeldet bleiben</label>
+					<a href="#passwort-vergessen">Passwort vergessen?</a>
+				</div>
+
+				<button class="submit" type="submit">Einloggen</button>
+				<p class="status" id="status" role="status" aria-live="polite"></p>
+			</form>
+		</section>
+	</main>
+
+	<script>
+		const form = document.querySelector('#login-form');
+		const password = document.querySelector('#password');
+		const togglePassword = document.querySelector('.toggle-password');
+		const status = document.querySelector('#status');
+
+		togglePassword.addEventListener('click', () => {
+			const isHidden = password.type === 'password';
+			password.type = isHidden ? 'text' : 'password';
+			togglePassword.textContent = isHidden ? 'Verbergen' : 'Anzeigen';
+			togglePassword.setAttribute('aria-label', isHidden ? 'Passwort verbergen' : 'Passwort anzeigen');
+		});
+
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			if (!form.checkValidity()) {
+				form.reportValidity();
+				return;
+			}
+			status.textContent = 'Anmeldung erfolgreich.';
+			window.location.href = 'HTML_Lernen.html';
+		});
+	</script>
+</body>
+</html>
